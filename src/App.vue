@@ -1,33 +1,35 @@
 <template>
   <div id="app">
-    <el-container class="flex flex-col ai-center">
-      <el-header class="b-b-1">
-        <el-row class="wh100">
-          <el-col :span="6" class="h100 flex ai-center">
+    <el-container class="d-flex flex-column ai-center">
+      
+      <!-- 头部固定的 -->
+      <el-header class="b-b-1 p-b-3">
+        <el-row class="w-100 h-100">
+          <el-col :span="6" class="h-100 d-flex ai-center">
             <a href="#" class="logo">
               <div class="logoBg"></div>
             </a>
           </el-col >
-          <el-col :span="5" class="h100"></el-col>
-          <el-col :span="13" class="h100 flex ai-center jc-center">
-            <el-menu :default-active="activeIndex" class="el-menu-demo  wh100 flex jc-around" mode="horizontal" @select="handleSelect" style="border: none;">
-              <el-menu-item style="font-size: 16px" index="1">首页</el-menu-item>
-              <el-menu-item style="font-size: 16px" index="2">排行榜</el-menu-item>
-              <el-menu-item style="font-size: 16px" index="3">购物车</el-menu-item>
-              <el-menu-item style="font-size: 16px" index="4">订单</el-menu-item>
-              
-              
+          <el-col :span="5" class="h-100"></el-col>
+          <el-col :span="13" class="h-100">
+            <el-menu :default-active="activeIndex" class="el-menu-demo  w-100 h-100 d-flex jc-around" mode="horizontal" @select="handleSelect" text-color="#444" active-text-color="#409EFF" default-active="/" router style="border: none;">
+              <el-menu-item class="fs-lg" index="/">首页</el-menu-item>
+              <el-menu-item class="fs-lg" index="list">排行榜</el-menu-item>
+              <el-menu-item class="fs-lg" index="car">购物车</el-menu-item>
+              <el-menu-item class="fs-lg" index="order">订单</el-menu-item> 
             </el-menu>
           </el-col>
         </el-row>
-      </el-header>
-      
+      </el-header> 
+
+      <router-view></router-view>
+
     </el-container>
   </div>
 </template>
 
-<style lang="scss">
-@import url('./assets/scss/style.scss');
+<style lang="less">
+@import url('./assets/less/style.less');
 *{
   margin: 0;
   padding: 0;
@@ -40,6 +42,7 @@
   text-align: center;
   color: #2c3e50;
 }
+
 .el-container{
   .el-header{
     width: 1200px;
