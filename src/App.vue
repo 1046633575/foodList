@@ -22,7 +22,9 @@
         </el-row>
       </el-header> 
 
-      <router-view></router-view>
+      <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
 
     </el-container>
   </div>
@@ -44,10 +46,14 @@
 }
 
 .el-container{
+  padding-top: 60px;
   .el-header{
     width: 1200px;
     padding: 0 0;
     background-color: #fff;
+    position: fixed;
+    top: 0;
+    z-index: 999;
     .logo{
       width: 158px;
       height: 60px;
