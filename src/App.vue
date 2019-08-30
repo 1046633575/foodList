@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <el-container class="d-flex flex-column ai-center">
-      
       <!-- 头部固定的 -->
       <el-header class="b-b-1 p-b-3">
         <el-row class="w-100 h-100">
@@ -12,17 +11,17 @@
           </el-col >
           <el-col :span="5" class="h-100"></el-col>
           <el-col :span="13" class="h-100">
-            <el-menu :default-active="activeIndex" class="el-menu-demo  w-100 h-100 d-flex jc-around" mode="horizontal" @select="handleSelect" text-color="#444" active-text-color="#409EFF" default-active="/" router style="border: none;">
+            <el-menu :default-active="activeIndex" class="el-menu-demo  w-100 h-100 d-flex jc-around" default-active="/" mode="horizontal" @select="handleSelect" text-color="#444" active-text-color="#409EFF" router style="border: none;">
               <el-menu-item class="fs-lg" index="/">首页</el-menu-item>
               <el-menu-item class="fs-lg" index="list">排行榜</el-menu-item>
               <el-menu-item class="fs-lg" index="car">购物车</el-menu-item>
-              <el-menu-item class="fs-lg" index="order">订单</el-menu-item> 
+              <el-menu-item class="fs-lg" index="order">订单</el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
-      </el-header> 
+      </el-header>
 
-      <keep-alive>
+      <keep-alive exclude="restaurant">
         <router-view></router-view>
       </keep-alive>
 

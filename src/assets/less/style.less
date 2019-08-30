@@ -8,15 +8,29 @@
 }
 html{
     font-size: 14px;
+    color: #444;
+}
+
+.clearFix::after{
+  content: "";
+  display: block;
+  clear: both;
 }
 
 //border
 .b-b-1{
   border-bottom: 1px solid #dcdfe6 !important;
 }
+.border-1{
+  border: 1px solid #eee;
+}
 //border-radius
 .b-1{
   border-radius: 4px;
+}
+//box-shadow
+.box-shadow{
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.1);
 }
 
 //colors
@@ -37,13 +51,13 @@ html{
 
 //text
 .text-left{
-  text-aligin: left !important;
+  text-align: left !important;
 }
 .text-right{
-  text-aligin: right !important;
+  text-align: right !important;
 }
 .text-center{
-  text-aligin: center !important;
+  text-align: center !important;
 }
 
 //font size
@@ -55,6 +69,10 @@ html{
 }
 .fs-lg{
   font-size: 16px !important;
+}
+.fs-llg{
+  font-size: 22px !important;
+  font-weight: normal;
 }
 
 

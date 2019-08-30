@@ -7,7 +7,7 @@
 
         <!-- 店铺模块  -->
         <div class="content m-t-5" style="height: 1000px">
-          <div class="item m-b-4 b-1" :class="i % 2 == 0 ? 'left' : 'right'" v-for="(item,i) in restaurant" :key="item.id">
+          <div class="item m-b-4 b-1 border-1 box-shadow" :class="i % 2 == 0 ? 'left' : 'right'" v-for="(item,i) in restaurant" :key="item.id">
             <router-link :to="{ path: 'restaurant', query: { id: item.id}}" tag="div" class="p-b-5">
                 <div class="d-flex flex-column ai-center p-t-5 b-1">
                   <div style="width: 300px; height: 300px; overflow: hidden;">
@@ -52,7 +52,7 @@ export default {
     getBanner () {
       this.$http.get('/banner').then((res) => {
         if (res.status === 200) {
-          this.banner = res.data.data
+          this.banner = res.data
         }
       })
     },
@@ -69,6 +69,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+    .container{
+      width: 1200px;
+    }
     .swiper{
         width: 1200px;
         height: 400px;
@@ -77,7 +80,6 @@ export default {
       .item{
         width: 45%;
         float: left;
-        background-color: #eee;
         cursor: pointer;
         &.right{
           float: right;
@@ -88,7 +90,6 @@ export default {
         &:hover{
           & img{
             transform: scale(1.1);
-            
           }
         }
       }
