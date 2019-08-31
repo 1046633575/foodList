@@ -110,6 +110,12 @@ export default {
     },
     // 添加到购物车
     add (obj, id) {
+      this.$message({
+        message: '添加成功',
+        type: 'success',
+        duration: 2000,
+        center: 'true'
+      })
       this.$store.commit("addNum")
       this.$store.commit("addCar", {id: obj.id, foodId: id})
     }
