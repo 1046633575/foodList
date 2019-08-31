@@ -91,8 +91,8 @@ export default {
         duration: 2000,
         center: 'true'
       })
-      this.$store.commit("addNum")
-      this.$store.commit("addCar", {id: obj.id, foodId: id})
+      this.$store.commit('addNum')
+      this.$store.commit('addCar', { id: obj.id, foodId: id })
     }
   }
 }
