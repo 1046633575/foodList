@@ -7,9 +7,11 @@ import 'element-ui/lib/theme-chalk/index.css'
 import Swiper from './components/Swiper.vue'
 import Axios from 'axios'
 import VueLazyload from 'vue-lazyload'
+import Card from './components/Card.vue'
 
 // 注册全局组件
 Vue.component('mySwiper', Swiper)
+Vue.component('myCard', Card)
 
 // 使用 element-ui
 Vue.use(ElementUI)
