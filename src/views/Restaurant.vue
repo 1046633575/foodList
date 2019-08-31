@@ -42,7 +42,7 @@
                             <div>￥{{itemList.price}}</div>
                         </div>
                         <div>
-                            <el-button type="primary">添加到购物车</el-button>
+                            <el-button type="primary" @click="add(restaurant,itemList.id)">添加到购物车</el-button>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,9 @@ export default {
     }
   },
   created () {
+    // 获取传入的 id
     this.getQueryId()
+    // 获取餐厅数据
     this.getRestaurant()
   },
   methods: {
@@ -105,6 +107,11 @@ export default {
       }
       data.formatArr = formatArr
       this.restaurant = data
+    },
+    // 添加到购物车
+    add (obj, id) {
+      this.$store.commit("addNum")
+      this.$store.commit("addCar", {id: obj.id, foodId: id})
     }
   }
 }
