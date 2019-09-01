@@ -11,11 +11,11 @@
           </el-col >
           <el-col :span="5" class="h-100"></el-col>
           <el-col :span="13" class="h-100">
-            <el-menu :default-active="activeIndex" class="el-menu-demo  w-100 h-100 d-flex jc-around" default-active="/" mode="horizontal" @select="handleSelect" text-color="#444" active-text-color="#409EFF" router style="border: none;">
+            <el-menu :default-active="activeIndex" class="el-menu-demo w-100 h-100 d-flex jc-around" mode="horizontal" @select="handleSelect" text-color="#444" active-text-color="#409EFF" router style="border: none;">
               <el-menu-item class="fs-lg" index="/">首页</el-menu-item>
-              <el-menu-item class="fs-lg" index="list">排行榜</el-menu-item>
-              <el-menu-item class="fs-lg d-flex ai-center" index="car">购物车<el-badge class="mark" :value="this.$store.state.num" /></el-menu-item>
-              <el-menu-item class="fs-lg" index="order">订单</el-menu-item>
+              <el-menu-item class="fs-lg" index="/list">排行榜</el-menu-item>
+              <el-menu-item class="fs-lg d-flex ai-center" index="/car">购物车<el-badge class="mark" :value="this.$store.state.num" /></el-menu-item>
+              <el-menu-item class="fs-lg" index="/order">订单</el-menu-item>
             </el-menu>
           </el-col>
         </el-row>
@@ -28,6 +28,22 @@
     </el-container>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      activeIndex: '/'
+    }
+  },
+  watch: {
+    // 当路由变化时，导航栏也变化
+    $route (to, from) {
+      this.activeIndex = to.path
+    }
+  }
+}
+</script>
 
 <style lang="less">
 @import url('./assets/less/style.less');
