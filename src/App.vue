@@ -21,7 +21,7 @@
         </el-row>
       </el-header>
 
-      <keep-alive :exclude="['restaurant','car']">
+      <keep-alive :exclude="['restaurant','car','order']">
         <router-view></router-view>
       </keep-alive>
 

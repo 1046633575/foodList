@@ -1,5 +1,8 @@
 <template>
     <div class="container m-t-3">
+        <el-card class="m-t-5" v-show="flag" style="width: 1200px;">
+            <div style="color: #409EFF;">购物车里什么都没有</div>
+        </el-card>
         <el-card class="m-b-5" v-for="(item,i) in formatRestaurants" :key="item.obj.id">
             <my-card :restaurant="item.obj"></my-card>
             <el-card class="m-t-3">
@@ -39,8 +42,8 @@
             <el-card class="m-t-3">
                 <div class="d-flex jc-around ai-center">
                     <div>总数：{{total[i].num}}</div>
-                    <div>原价：￥<del>{{total[i].total}}</del></div>
-                    <div>折扣价：￥<span style="color: #F56C6C;">{{(total[i].total * 0.9).toFixed(2)}}</span></div>
+                    <div>原价：<del>￥{{total[i].total}}</del></div>
+                    <div>折扣价：<span style="color: #F56C6C;">￥{{(total[i].total * 0.9).toFixed(2)}}</span></div>
                     <div><el-button type="primary" plain @click="goBuy(i)">去付款</el-button></div>
                 </div>
             </el-card>
@@ -55,7 +58,8 @@ export default {
     return {
       restaurants: [],
       formatRestaurants: [],
-      total: []
+      total: [],
+      flag: false
     }
   },
   created () {
@@ -172,7 +176,7 @@ export default {
       orderItem.num = this.total[index].num
       orderItem.total = this.total[index].total
       // 获取格式化时间
-      orderItem.date = this.getyyyyMMdd()
+      orderItem.date = this.getDate()
       // 新建的订单项 push 进数组
       newArr.push(orderItem)
       // 更新订单数组
@@ -192,15 +196,34 @@ export default {
       this.$router.push('order')
     },
     // 创建格式化时间的方法 2020-01-01
-    getyyyyMMdd () {
-      let d = new Date()
-      let currDate = d.getDate()
-      let currMonth = d.getMonth() + 1
-      let currYear = d.getFullYear()
-      currMonth = currMonth.length < 2 ? ('0' + currMonth) : currMonth
-      currDate = currDate.length < 2 ? ('0' + currDate) : currDate
-      let yyyyMMdd = currYear + '-' + currMonth + '-' + currDate
-      return yyyyMMdd
+    getDate () {
+      let dt = new Date()
+      // 获取年
+      let year = dt.getFullYear()
+      // 获取月
+      let month = dt.getMonth() + 1// 从0开始的  +1变成正常月份
+      // 获取日
+      let day = dt.getDate()
+      // 获取小时
+      let hour = dt.getHours()
+      // 获取分钟
+      let minute = dt.getMinutes()
+      // 获取秒
+      let second = dt.getSeconds()
+      // 如果数值小于10 加0
+      month = month < 10 ? '0' + month : month
+      day = day < 10 ? '0' + day : day
+      hour = hour < 10 ? '0' + hour : hour
+      minute = minute < 10 ? '0' + minute : minute
+      second = second < 10 ? '0' + second : second
+      return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
+    }
+  },
+  watch: {
+    formatRestaurants: function () {
+      if (this.formatRestaurants.length === 0) {
+        this.flag = true
+      }
     }
   }
 }
