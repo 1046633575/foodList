@@ -64,9 +64,11 @@ export default {
   methods: {
     // 从 localStorage 中获取订单数据
     getOrders () {
+      console.log('哈哈哈')
       const orders = JSON.parse(localStorage.getItem('order'))
-      if (orders.length === 0) {
+      if (orders === null || orders.length === 0) {
         this.flag = true
+        this.orders = orders
       } else {
         this.orders = orders
       }
@@ -83,7 +85,6 @@ export default {
         const arr = JSON.parse(localStorage.getItem('order'))
         arr.splice(index, 1)
         localStorage.setItem('order', JSON.stringify(arr))
-        console.log('sss')
         // 重新获取订单数据
         this.getOrders()
         this.$message({
