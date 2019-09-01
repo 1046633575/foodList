@@ -41,7 +41,7 @@
                     <div>总数：{{total[i].num}}</div>
                     <div>原价：￥<del>{{total[i].total}}</del></div>
                     <div>折扣价：￥<span style="color: #F56C6C;">{{(total[i].total * 0.9).toFixed(2)}}</span></div>
-                    <div><el-button type="primary">去付款</el-button></div>
+                    <div><el-button type="primary" @click="goBuy(i)">去付款</el-button></div>
                 </div>
             </el-card>
         </el-card>
@@ -116,7 +116,7 @@ export default {
         total = 0
         for (let k of arr[i].cars) {
           num += k.num
-          total += num * Number(k.obj.price)
+          total += k.num * k.obj.price
         }
         const obj = {}
         obj.num = num
@@ -152,6 +152,47 @@ export default {
       this.formatRestaurants = arr
       // 计算总价
       this.computeTotal(this.formatRestaurants)
+    },
+    // 付款功能 使用 localStorage
+    goBuy (index) {
+      // 先判断本地有没有 订单数组
+      // 有就使用 订单数组
+      const arr = localStorage.getItem('order')
+      if (arr) {
+        const newArr = arr
+        const orderItem = this.formatRestaurants[index]
+        orderItem.num = this.total[index].num
+        orderItem.total = this.total[index].total
+        // 获取格式化时间
+        orderItem.date = this.getyyyyMMdd()
+        // 新建的订单项 push 进数组
+        newArr.push(orderItem)
+        // 更新订单数组
+        localStorage.setItem('order', newArr)
+      // 没有就创建订单数组
+      } else {
+        const newArr = []
+        const orderItem = this.formatRestaurants[index]
+        orderItem.num = this.total[index].num
+        orderItem.total = this.total[index].total
+        // 获取格式化时间
+        orderItem.date = this.getyyyyMMdd()
+        // 新建的订单项 push 进数组
+        newArr.push(orderItem)
+        // 更新订单数组
+        localStorage.setItem('order', newArr)
+      }
+    },
+    // 创建格式化时间的方法 2020-01-01
+    getyyyyMMdd () {
+      let d = new Date()
+      let currDate = d.getDate()
+      let currMonth = d.getMonth() + 1
+      let currYear = d.getFullYear()
+      currMonth = currMonth.length < 2 ? ('0' + currMonth) : currMonth
+      currDate = currDate.length < 2 ? ('0' + currDate) : currDate
+      let yyyyMMdd = currYear + '-' + currMonth + '-' + currDate
+      return yyyyMMdd
     }
   }
 }
