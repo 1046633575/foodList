@@ -41,7 +41,7 @@
                     <div>总数：{{total[i].num}}</div>
                     <div>原价：￥<del>{{total[i].total}}</del></div>
                     <div>折扣价：￥<span style="color: #F56C6C;">{{(total[i].total * 0.9).toFixed(2)}}</span></div>
-                    <div><el-button type="primary" @click="goBuy(i)">去付款</el-button></div>
+                    <div><el-button type="primary" plain @click="goBuy(i)">去付款</el-button></div>
                 </div>
             </el-card>
         </el-card>
@@ -137,6 +137,8 @@ export default {
       // 根据索引找到对象的 num 并修改
       arr[index].cars[newIndex].num--
       this.formatRestaurants = arr
+      // 同步 vuex 中的数据
+      this.$store.commit('addItem', { index: index, i: newIndex })
       // 计算总价
       this.computeTotal(this.formatRestaurants)
     },
@@ -150,6 +152,8 @@ export default {
       // 根据索引找到对象的 num 并修改
       arr[index].cars[newIndex].num++
       this.formatRestaurants = arr
+      // 同步 vuex 中的数据
+      this.$store.commit('addItem', { index: index, i: newIndex })
       // 计算总价
       this.computeTotal(this.formatRestaurants)
     },
@@ -157,31 +161,35 @@ export default {
     goBuy (index) {
       // 先判断本地有没有 订单数组
       // 有就使用 订单数组
-      const arr = localStorage.getItem('order')
+      const arr = JSON.parse(localStorage.getItem('order'))
+      var newArr
       if (arr) {
-        const newArr = arr
-        const orderItem = this.formatRestaurants[index]
-        orderItem.num = this.total[index].num
-        orderItem.total = this.total[index].total
-        // 获取格式化时间
-        orderItem.date = this.getyyyyMMdd()
-        // 新建的订单项 push 进数组
-        newArr.push(orderItem)
-        // 更新订单数组
-        localStorage.setItem('order', newArr)
-      // 没有就创建订单数组
+        newArr = arr
       } else {
-        const newArr = []
-        const orderItem = this.formatRestaurants[index]
-        orderItem.num = this.total[index].num
-        orderItem.total = this.total[index].total
-        // 获取格式化时间
-        orderItem.date = this.getyyyyMMdd()
-        // 新建的订单项 push 进数组
-        newArr.push(orderItem)
-        // 更新订单数组
-        localStorage.setItem('order', newArr)
+        newArr = []
       }
+      const orderItem = this.formatRestaurants[index]
+      orderItem.num = this.total[index].num
+      orderItem.total = this.total[index].total
+      // 获取格式化时间
+      orderItem.date = this.getyyyyMMdd()
+      // 新建的订单项 push 进数组
+      newArr.push(orderItem)
+      // 更新订单数组
+      localStorage.setItem('order', JSON.stringify(newArr))
+      // 删除 购物车中的项
+      this.formatRestaurants.splice(index, 1)
+      // 删除 vuex购物车中的项
+      this.$store.commit('deleteCar', index)
+      // 改变购物车总数
+      this.$store.commit('buyNum', this.total[index].num)
+      // 弹框提醒
+      this.$notify({
+        title: '购买成功',
+        type: 'success'
+      })
+      // 跳转至订单页面
+      this.$router.push('order')
     },
     // 创建格式化时间的方法 2020-01-01
     getyyyyMMdd () {

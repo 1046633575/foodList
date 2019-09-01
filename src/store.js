@@ -17,6 +17,10 @@ export default new Vuex.Store({
     reduceNum (state) {
       state.num--
     },
+    // 用于付款时购物车总数减少
+    buyNum (state, val) {
+      state.num -= val
+    },
     // 添加商品到购物车
     addCar (state, params) {
       const id = params.id
@@ -55,6 +59,18 @@ export default new Vuex.Store({
       }
       // 更新 vuex 的值
       state.car = car
+    },
+    // 用于购买时删除购物车中的数据
+    deleteCar (state, index) {
+      state.car.splice(index, 1)
+    },
+    // 用于点击增加按钮时同步 vuex 数据
+    addItem (state, obj) {
+      state.car[obj.index].car[obj.i].num++
+    },
+    // 用于点击减少按钮时同步 vuex 数据
+    reduceItem (state, obj) {
+      state.car[obj.index].car[obj.i].num--
     }
   },
   actions: {
