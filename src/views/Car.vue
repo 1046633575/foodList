@@ -69,7 +69,7 @@ export default {
   methods: {
     // 获取餐厅数据
     getRestaurant () {
-      this.$http.get('/restaurant').then((res) => {
+      this.$http.get('/restaurant.json').then((res) => {
         if (res.status === 200) {
           this.restaurants = res.data
           // 格式化 vuex 购物车数据

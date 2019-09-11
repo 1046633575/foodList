@@ -64,7 +64,6 @@ export default {
   methods: {
     // 从 localStorage 中获取订单数据
     getOrders () {
-      console.log('哈哈哈')
       const orders = JSON.parse(localStorage.getItem('order'))
       if (orders === null || orders.length === 0) {
         this.flag = true

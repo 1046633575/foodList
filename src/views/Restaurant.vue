@@ -47,7 +47,7 @@ export default {
     },
     // 获取餐厅数据
     getRestaurant () {
-      this.$http.get('/restaurant').then((res) => {
+      this.$http.get('/restaurant.json').then((res) => {
         if (res.status === 200) {
           // 调用查找数据方法
           this.findItem(res.data)

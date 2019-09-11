@@ -1,0 +1,26 @@
+[
+	{
+		"id": 1001,
+		"img": "http://47.95.5.96:8000/meituan/images/banner05.jpg"
+	},
+	{
+		"id": 1002,
+		"img": "http://47.95.5.96:8000/meituan/images/banner08.jpg"
+	},
+	{
+		"id": 1003,
+		"img": "http://47.95.5.96:8000/meituan/images/banner07.jpg"
+	},
+	{
+		"id": 1004,
+		"img": "http://47.95.5.96:8000/meituan/images/banner04.jpg"
+	},
+	{
+		"id": 1005,
+		"img": "http://47.95.5.96:8000/meituan/images/banner01.jpg"
+	},
+	{
+		"id": 1006,
+		"img": "http://47.95.5.96:8000/meituan/images/banner06.jpg"
+	}
+]

@@ -50,7 +50,7 @@ export default {
   methods: {
     // 获取轮播图数据
     getBanner () {
-      this.$http.get('/banner').then((res) => {
+      this.$http.get('/banner.json').then((res) => {
         if (res.status === 200) {
           this.banner = res.data
         }
@@ -58,7 +58,7 @@ export default {
     },
     // 获取餐厅数据
     getRestaurant () {
-      this.$http.get('/restaurant').then((res) => {
+      this.$http.get('/restaurant.json').then((res) => {
         if (res.status === 200) {
           this.restaurant = res.data
         }

@@ -26,7 +26,7 @@ Vue.use(VueLazyload, {
 
 // 使用 axios
 Vue.prototype.$http = Axios
-Axios.defaults.baseURL = 'https://easy-mock.com/mock/5d6782294c0457664ea5c8a8/foodList'
+Axios.defaults.baseURL = 'http://47.95.5.96:8000/data'
 
 Vue.config.productionTip = false
 
